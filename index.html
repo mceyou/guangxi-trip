@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>爸妈的广西自驾之旅</title>
+    <title>爸妈的自驾之旅</title>
     <style>
         :root {
             --primary-color: #0088ff;
@@ -18,7 +18,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 0 0 80px 0; /* 底部留白给悬浮按钮 */
+            padding: 0 0 80px 0;
             line-height: 1.6;
             -webkit-tap-highlight-color: transparent;
         }
@@ -28,7 +28,7 @@
             background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://s41.ax1x.com/2026/02/19/pZX1mE8.jpg');
             background-size: cover;
             background-position: center;
-            height: 200px;
+            height: 220px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -36,11 +36,39 @@
             color: white;
             text-align: center;
             padding: 20px;
+            transition: background-image 0.5s ease;
         }
-        .hero h1 { margin: 0; font-size: 28px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .hero p { margin: 10px 0 0; font-size: 16px; opacity: 0.9; }
+        .hero h1 { margin: 0 0 10px 0; font-size: 28px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .hero p { margin: 0; font-size: 16px; opacity: 0.9; }
 
-        .container { padding: 20px 15px; }
+        /* 路线切换按钮组 */
+        .route-tabs {
+            display: flex;
+            background: #fff;
+            margin: -25px 20px 20px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 14px 0;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            font-weight: bold;
+            color: #7f8c8d;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .container { padding: 0 15px 20px 15px; }
 
         /* 卡片样式 */
         .day-card {
@@ -49,6 +77,12 @@
             margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             overflow: hidden;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card-image {
@@ -195,153 +229,263 @@
 </head>
 <body>
 
-    <div class="hero">
-        <h1>🚗 广西边境山水游</h1>
+    <div class="hero" id="hero-banner">
+        <h1 id="hero-title">🚗 广西边境山水游</h1>
         <p>慢慢走，欣赏沿途好风光</p>
+    </div>
+
+    <div class="route-tabs">
+        <button class="tab-btn active" onclick="switchRoute('guangxi')">🌴 广西康养线</button>
+        <button class="tab-btn" onclick="switchRoute('kunming')">🌸 昆明迎春线</button>
     </div>
 
     <div class="container">
 
-        <!-- Day 1 -->
-        <div class="day-card">
-            <!-- 图片：百色 -->
-            <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1VDP.jpg');">
-                <span class="day-badge">Day 1 (2.20)</span>
+        <div id="route-guangxi">
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1VDP.jpg');">
+                    <span class="day-badge">Day 1 (2.20)</span>
+                </div>
+                <div class="card-body">
+                    <div class="location-title">
+                        百色起义纪念园
+                        <a href="https://www.baidu.com/s?wd=百色天气" target="_blank" class="weather-link">⛅ 看百色天气</a>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🚗</span>
+                        <span class="text">六盘水 ➔ 百色 (约4.5小时)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🎡</span>
+                        <span class="text">展馆有电梯，广场平整，<span class="highlight">不费腿脚</span>。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=百色起义纪念园&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
+                        <button onclick="copyText('百色起义纪念园')" class="btn btn-copy">📋 复制名字</button>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="location-title">
-                    百色起义纪念园
-                    <a href="https://www.baidu.com/s?wd=百色天气" target="_blank" class="weather-link">⛅ 看百色天气</a>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1ZHf.png');">
+                    <span class="day-badge">Day 2 (2.21)</span>
                 </div>
-                <div class="info-row">
-                    <span class="icon">🚗</span>
-                    <span class="text">六盘水 ➔ 百色 (约4.5小时)</span>
+                <div class="card-body">
+                    <div class="location-title">
+                        靖西鹅泉风景区
+                        <a href="https://www.baidu.com/s?wd=靖西天气" target="_blank" class="weather-link">⛅ 看靖西天气</a>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🚗</span>
+                        <span class="text">百色 ➔ 靖西 (约1.5小时)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🎡</span>
+                        <span class="text">平地看水，亭子喝茶，<span class="highlight">零体力消耗</span>。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=靖西鹅泉风景区&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
+                        <button onclick="copyText('靖西鹅泉风景区')" class="btn btn-copy">📋 复制名字</button>
+                    </div>
                 </div>
-                <div class="info-row">
-                    <span class="icon">🎡</span>
-                    <span class="text">展馆有电梯，广场平整，<span class="highlight">不费腿脚</span>。</span>
+            </div>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1mE8.jpg');">
+                    <span class="day-badge">Day 3 (2.22)</span>
                 </div>
-                <div class="btn-group">
-                    <a href="https://uri.amap.com/search?keyword=百色起义纪念园&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
-                    <button onclick="copyText('百色起义纪念园')" class="btn btn-copy">📋 复制名字</button>
+                <div class="card-body">
+                    <div class="location-title">
+                        大新明仕田园
+                        <a href="https://www.baidu.com/s?wd=大新县天气" target="_blank" class="weather-link">⛅ 看大新天气</a>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🛶</span>
+                        <span class="text">坐竹筏听歌，<span class="highlight">不用走路</span>，推窗即山水。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=大新明仕田园&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
+                        <button onclick="copyText('大新明仕田园')" class="btn btn-copy">📋 复制名字</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1nUS.png');">
+                    <span class="day-badge">Day 4 (2.23)</span>
+                </div>
+                <div class="card-body">
+                    <div class="location-title">
+                        德天跨国瀑布
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">⚠️</span>
+                        <span class="text">务必：坐观光车+木栈道+<span class="highlight">魔毯上山</span>。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=德天跨国瀑布游客中心&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去景区</a>
+                        <a href="https://uri.amap.com/search?keyword=崇左市&callnative=1" class="btn btn-full btn-nav" style="background:#5ca4ea">🌙 晚上住：崇左市区 (点我导航)</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX18uq.jpg');">
+                    <span class="day-badge">Day 5 (2.24)</span>
+                </div>
+                <div class="card-body">
+                    <div class="location-title">
+                        平安返程回家
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🚗</span>
+                        <span class="text">崇左 ➔ 六盘水 (约6-7小时)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">☕</span>
+                        <span class="text">路程较长，务必<span class="highlight">每开2小时进服务区</span>休息15分钟，喝点热水伸展腰腿。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=六盘水市&callnative=1" class="btn btn-full btn-nav" target="_blank">🔵 开启回家的导航</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Day 2 -->
-        <div class="day-card">
-            <!-- 图片：靖西鹅泉（用水乡图代替） -->
-            <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1ZHf.png');">
-                <span class="day-badge">Day 2 (2.21)</span>
+        <div id="route-kunming" style="display: none;">
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1558281050-0cb2a9ae6d4d?auto=format&fit=crop&w=600&q=80');">
+                    <span class="day-badge">Day 1</span>
+                </div>
+                <div class="card-body">
+                    <div class="location-title">
+                        罗平金鸡峰丛
+                        <a href="https://www.baidu.com/s?wd=罗平天气" target="_blank" class="weather-link">⛅ 看罗平天气</a>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🚗</span>
+                        <span class="text">六盘水 ➔ 罗平 (约2.5小时)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🌼</span>
+                        <span class="text">万亩油菜花海。建议<span class="highlight">租景区观光车或牛车</span>，不用一直走路。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=罗平金鸡峰丛&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
+                        <button onclick="copyText('罗平金鸡峰丛')" class="btn btn-copy">📋 复制名字</button>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="location-title">
-                    靖西鹅泉风景区
-                    <a href="https://www.baidu.com/s?wd=靖西天气" target="_blank" class="weather-link">⛅ 看靖西天气</a>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1527684651001-731c474bbb5a?auto=format&fit=crop&w=600&q=80');">
+                    <span class="day-badge">Day 2</span>
                 </div>
-                <div class="info-row">
-                    <span class="icon">🚗</span>
-                    <span class="text">百色 ➔ 靖西 (约1.5小时)</span>
+                <div class="card-body">
+                    <div class="location-title">
+                        石林风景区
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🚗</span>
+                        <span class="text">罗平 ➔ 石林 (约1.5小时)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">⚠️</span>
+                        <span class="text">景区极大，务必买<span class="highlight">电瓶车票</span>，只逛平坦的大小石林核心区。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=石林风景区&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
+                        <a href="https://uri.amap.com/search?keyword=昆明市翠湖公园&callnative=1" class="btn btn-full btn-nav" style="background:#5ca4ea">🌙 晚上住：昆明市区 (点我导航)</a>
+                    </div>
                 </div>
-                <div class="info-row">
-                    <span class="icon">🎡</span>
-                    <span class="text">平地看水，亭子喝茶，<span class="highlight">零体力消耗</span>。</span>
+            </div>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1582650530756-78b105c3175c?auto=format&fit=crop&w=600&q=80');">
+                    <span class="day-badge">Day 3</span>
                 </div>
-                <div class="btn-group">
-                    <a href="https://uri.amap.com/search?keyword=靖西鹅泉风景区&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
-                    <button onclick="copyText('靖西鹅泉风景区')" class="btn btn-copy">📋 复制名字</button>
+                <div class="card-body">
+                    <div class="location-title">
+                        昆明慢生活一日游
+                        <a href="https://www.baidu.com/s?wd=昆明天气" target="_blank" class="weather-link">⛅ 看昆明天气</a>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🕊️</span>
+                        <span class="text">上午：去<span class="highlight">海埂大坝</span>喂红嘴鸥，步道极其平直。</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🍵</span>
+                        <span class="text">下午：逛<span class="highlight">翠湖公园</span>和陆军讲武堂，喝茶吃正宗过桥米线。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=海埂大坝&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去大坝</a>
+                        <button onclick="copyText('海埂大坝')" class="btn btn-copy">📋 复制名字</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80');">
+                    <span class="day-badge">Day 4</span>
+                </div>
+                <div class="card-body">
+                    <div class="location-title">
+                        澄江抚仙湖
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🚗</span>
+                        <span class="text">昆明 ➔ 抚仙湖 (约1小时)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🐟</span>
+                        <span class="text">沿环湖路自驾走走停停。晚上吃特色<span class="highlight">石锅鱼</span>滋补，住湖景房听水声。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=抚仙湖月亮湾湿地公园&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去湖边</a>
+                        <button onclick="copyText('抚仙湖')" class="btn btn-copy">📋 复制名字</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX18uq.jpg');">
+                    <span class="day-badge">Day 5</span>
+                </div>
+                <div class="card-body">
+                    <div class="location-title">
+                        平安返程回家
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🚗</span>
+                        <span class="text">抚仙湖 ➔ 六盘水 (约4.5小时)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">☕</span>
+                        <span class="text">睡到自然醒，中午在曲靖服务区多休息，安全到家。</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://uri.amap.com/search?keyword=六盘水市&callnative=1" class="btn btn-full btn-nav" target="_blank">🔵 开启回家的导航</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Day 3 -->
-        <div class="day-card">
-            <!-- 图片：明仕田园（用喀斯特地貌图代替） -->
-            <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1mE8.jpg');">
-                <span class="day-badge">Day 3 (2.22)</span>
-            </div>
-            <div class="card-body">
-                <div class="location-title">
-                    大新明仕田园
-                    <a href="https://www.baidu.com/s?wd=大新县天气" target="_blank" class="weather-link">⛅ 看大新天气</a>
-                </div>
-                <div class="info-row">
-                    <span class="icon">🛶</span>
-                    <span class="text">坐竹筏听歌，<span class="highlight">不用走路</span>，推窗即山水。</span>
-                </div>
-                <div class="btn-group">
-                    <a href="https://uri.amap.com/search?keyword=大新明仕田园&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去这里</a>
-                    <button onclick="copyText('大新明仕田园')" class="btn btn-copy">📋 复制名字</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 4 -->
-        <div class="day-card">
-            <!-- 图片：瀑布 -->
-            <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX1nUS.png');">
-                <span class="day-badge">Day 4 (2.23)</span>
-            </div>
-            <div class="card-body">
-                <div class="location-title">
-                    德天跨国瀑布
-                </div>
-                <div class="info-row">
-                    <span class="icon">⚠️</span>
-                    <span class="text">务必：坐观光车+木栈道+<span class="highlight">魔毯上山</span>。</span>
-                </div>
-                <div class="btn-group">
-                    <a href="https://uri.amap.com/search?keyword=德天跨国瀑布游客中心&callnative=1" class="btn btn-nav" target="_blank">🔵 导航去景区</a>
-                    <a href="https://uri.amap.com/search?keyword=崇左市&callnative=1" class="btn btn-full btn-nav" style="background:#5ca4ea">🌙 晚上住：崇左市区 (点我导航)</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="day-card">
-            <div class="card-image" style="background-image: url('https://s41.ax1x.com/2026/02/19/pZX18uq.jpg');">
-                <span class="day-badge">Day 5 (2.24)</span>
-            </div>
-            <div class="card-body">
-                <div class="location-title">
-                    平安返程回家
-                    <a href="https://www.baidu.com/s?wd=六盘水天气" target="_blank" class="weather-link">⛅ 看家里天气</a>
-                </div>
-                <div class="info-row">
-                    <span class="icon">🚗</span>
-                    <span class="text">崇左 ➔ 六盘水 (约6-7小时)</span>
-                </div>
-                <div class="info-row">
-                    <span class="icon">☕</span>
-                    <span class="text">路程较长，务必<span class="highlight">每开2小时进服务区</span>休息15分钟，喝点热水伸展腰腿。</span>
-                </div>
-                <div class="info-row">
-                    <span class="icon">💡</span>
-                    <span class="text">如果觉得累，可提前在“兴义市”下高速住一晚，绝不硬撑，安全第一！</span>
-                </div>
-                <div class="btn-group">
-                    <a href="https://uri.amap.com/search?keyword=六盘水市&callnative=1" class="btn btn-full btn-nav" target="_blank">🔵 开启回家的导航</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 备忘清单 -->
         <div class="checklist">
             <h3 style="margin-top:0; color:#2c3e50;">🎒 出门前检查一下</h3>
-            <label class="check-item"><input type="checkbox"> 身份证 (重要)</label>
-            <label class="check-item"><input type="checkbox"> 手机充电器</label>
-            <label class="check-item"><input type="checkbox"> 常用药品 (高血压/肠胃药)</label>
-            <label class="check-item"><input type="checkbox"> 保温杯 (装热水)</label>
+            <label class="check-item"><input type="checkbox"> 身份证 (极重要，老人有门票优惠)</label>
+            <label class="check-item"><input type="checkbox"> 手机充电器 / 充电宝</label>
+            <label class="check-item"><input type="checkbox"> 常用药品 (高血压/肠胃药等)</label>
+            <label class="check-item"><input type="checkbox"> 保温杯 (出门装热水)</label>
             <label class="check-item"><input type="checkbox"> 驾驶证 / 行驶证</label>
+            <label class="check-item"><input type="checkbox"> 检查车辆胎压与玻璃水</label>
         </div>
 
     </div>
 
-    <!-- 底部悬浮栏 -->
     <div class="sticky-footer">
         <div class="footer-text">
             遇到问题不要急<br>随时给孩子打电话
         </div>
-        <!-- ⚠️ 请修改下面的电话号码 -->
         <a href="tel:15685151386" class="call-btn">
             📞 呼叫子女
         </a>
@@ -350,8 +494,37 @@
     <div id="toast">已复制</div>
 
     <script>
+        // 路线切换逻辑
+        function switchRoute(route) {
+            var btnGuangxi = document.querySelectorAll('.tab-btn')[0];
+            var btnKunming = document.querySelectorAll('.tab-btn')[1];
+            var routeGuangxi = document.getElementById('route-guangxi');
+            var routeKunming = document.getElementById('route-kunming');
+            var heroTitle = document.getElementById('hero-title');
+            var heroBanner = document.getElementById('hero-banner');
+
+            if (route === 'guangxi') {
+                btnGuangxi.classList.add('active');
+                btnKunming.classList.remove('active');
+                routeGuangxi.style.display = 'block';
+                routeKunming.style.display = 'none';
+                
+                heroTitle.innerText = '🚗 广西边境山水游';
+                heroBanner.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://s41.ax1x.com/2026/02/19/pZX1mE8.jpg')";
+            } else {
+                btnKunming.classList.add('active');
+                btnGuangxi.classList.remove('active');
+                routeKunming.style.display = 'block';
+                routeGuangxi.style.display = 'none';
+                
+                heroTitle.innerText = '🌸 昆明迎春花海游';
+                // 切换到昆明时的封面图
+                heroBanner.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1558281050-0cb2a9ae6d4d?auto=format&fit=crop&w=1000&q=80')"; 
+            }
+        }
+
+        // 复制文字功能
         function copyText(text) {
-            // 兼容性复制逻辑
             var textArea = document.createElement("textarea");
             textArea.value = text;
             textArea.style.position = "fixed";
@@ -376,7 +549,4 @@
         }
     </script>
 </body>
-</html> 
-
-
-
+</html>
