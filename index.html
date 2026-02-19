@@ -2,123 +2,398 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>父母专享：广西边境康养自驾游</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f7f9fc; color: #333; line-height: 1.6; padding: 20px; max-width: 600px; margin: 0 auto; }
-        h1 { text-align: center; color: #2c3e50; font-size: 24px; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 30px; }
-        .day-card { background: #fff; border-radius: 12px; padding: 15px 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #3498db; }
-        .day-header { display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: bold; color: #2980b9; margin-bottom: 10px; }
-        .route { font-size: 15px; font-weight: bold; color: #e67e22; margin-bottom: 10px; }
-        details { background: #f8f9fa; border-radius: 8px; padding: 10px; margin-top: 10px; cursor: pointer; }
-        summary { font-weight: bold; color: #2c3e50; outline: none; }
-        .details-content { margin-top: 10px; font-size: 15px; color: #555; }
-        .highlight { color: #e74c3c; font-weight: bold; }
-        .tips { background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; margin-top: 30px; font-size: 14px; }
+        :root {
+            --primary-color: #0088ff; /* 高德蓝 */
+            --accent-color: #ff9f43; /* 温暖橙 */
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --success-color: #2ecc71;
+        }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px 15px;
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 标题区域 */
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 26px;
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+        }
+        .subtitle {
+            color: var(--text-sub);
+            font-size: 15px;
+            background: #e1ecf4;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* 卡片通用样式 */
+        .day-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        /* 卡片头部 */
+        .day-header {
+            background: linear-gradient(to right, #f8f9fa, #fff);
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .day-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .day-date {
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+        .day-theme {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* 路线概览 */
+        .route-info {
+            padding: 15px 20px 5px 20px;
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .route-info::before {
+            content: "🚗";
+            margin-right: 8px;
+        }
+
+        /* 详情区域 */
+        .content {
+            padding: 10px 20px 20px 20px;
+        }
+        .info-block {
+            margin-bottom: 15px;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+        .info-text {
+            color: #555;
+            font-size: 16px; /* 加大字号 */
+            text-align: justify;
+        }
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+            background: #fff0f0;
+            padding: 0 4px;
+        }
+
+        /* 按钮区域 */
+        .action-area {
+            background: #fafafa;
+            padding: 15px 20px;
+            border-top: 1px dashed #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
         
-        /* 导航按钮样式 */
-        .nav-actions { margin-top: 10px; margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn-wechat { background-color: #07c160; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; }
-        .btn-gaode { background-color: #0076FF; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px 0;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+            transition: opacity 0.2s;
+        }
+        .btn:active { opacity: 0.8; }
+
+        .btn-gaode {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 118, 255, 0.2);
+        }
+        .btn-copy {
+            background-color: white;
+            color: #555;
+            border: 1px solid #ddd;
+        }
+
+        /* 底部提示 */
+        .tips-card {
+            background: #fff8e1;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .tips-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+
+        /* 弹窗提示 */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
 
-    <h1>🚗 广西边境山水慢游攻略</h1>
-    <div class="subtitle">六盘水 ➔ 百色 ➔ 靖西 ➔ 崇左</div>
+    <header>
+        <h1>广西山水康养慢游</h1>
+        <div class="subtitle">六盘水 ➔ 百色 ➔ 靖西 ➔ 崇左</div>
+    </header>
 
+    <!-- DAY 1 -->
     <div class="day-card">
-        <div class="day-header"><span>Day 1 (2月20日)</span><span>出发与南下</span></div>
-        <div class="route">📍 六盘水 ➔ 百色市 (约4.5小时)</div>
-        <details>
-            <summary>👇 点击查看详细安排</summary>
-            <div class="details-content">
-                <p><b>09:30</b> 吃完早餐出发，全程高速路况极佳。</p>
-                <p><b>核心游玩：</b>【百色起义纪念园】。展馆有直梯，广场平整，体验红色文化，对腿脚非常友好。</p>
-                <div class="nav-actions">
-                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=百色起义纪念园" class="btn-wechat" target="_blank">🟢 微信一键导航</a>
-                    <a href="https://uri.amap.com/search?keyword=百色起义纪念园" class="btn-gaode" target="_blank">🔵 高德地图打开</a>
-                </div>
-                <p><b>住宿美食：</b> 15:30 抵达百色市入住。晚上尝尝清淡的百色米粉或右江鱼。</p>
+        <div class="day-header">
+            <div>
+                <div class="day-theme">出发与红色记忆</div>
+                <div class="day-date">2月20日 (第一天)</div>
             </div>
-        </details>
+            <span class="day-tag">Day 1</span>
+        </div>
+        <div class="route-info">六盘水 ➔ 百色市 (约4.5小时)</div>
+        <div class="content">
+            <div class="info-block">
+                <span class="info-label">📅 行程安排</span>
+                <div class="info-text">09:30 早餐后出发，全程高速路况好。下午游览【百色起义纪念园】，展馆有电梯，广场平整，<span class="highlight">对腿脚友好</span>。</div>
+            </div>
+            <div class="info-block">
+                <span class="info-label">🍜 住宿美食</span>
+                <div class="info-text">入住百色市区。晚餐推荐：清淡的百色米粉或右江鱼。</div>
+            </div>
+        </div>
+        <div class="action-area">
+            <!-- 导航逻辑优化：callnative=1 尝试唤起APP -->
+            <a href="https://uri.amap.com/search?keyword=百色起义纪念园&callnative=1" class="btn btn-gaode" target="_blank">🔵 打开高德地图导航</a>
+            <button onclick="copyText('百色起义纪念园')" class="btn btn-copy">📋 复制目的地 (用于车载导航)</button>
+        </div>
     </div>
 
+    <!-- DAY 2 -->
     <div class="day-card">
-        <div class="day-header"><span>Day 2 (2月21日)</span><span>避世水乡</span></div>
-        <div class="route">📍 百色 ➔ 靖西市 (约1.5小时)</div>
-        <details>
-            <summary>👇 点击查看详细安排</summary>
-            <div class="details-content">
-                <p><b>上午：</b> 睡到自然醒，酒店吃完早餐后驱车前往靖西。</p>
-                <p><b>核心游玩：</b>【鹅泉风景区】。纯平地水乡，看清澈泉水与初春田园。走累了就在亭子里喝茶看野鸭，<span class="highlight">完全零体力消耗</span>。</p>
-                <div class="nav-actions">
-                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=靖西鹅泉风景区" class="btn-wechat" target="_blank">🟢 微信一键导航</a>
-                    <a href="https://uri.amap.com/search?keyword=靖西鹅泉风景区" class="btn-gaode" target="_blank">🔵 高德地图打开</a>
-                </div>
-                <p><b>住宿美食：</b> 靖西市区或鹅泉周边客栈。午餐推荐农家乐（泉水煎鸭蛋、炒野菜）。</p>
+        <div class="day-header">
+            <div>
+                <div class="day-theme">避世水乡</div>
+                <div class="day-date">2月21日 (第二天)</div>
             </div>
-        </details>
+            <span class="day-tag">Day 2</span>
+        </div>
+        <div class="route-info">百色 ➔ 靖西市 (约1.5小时)</div>
+        <div class="content">
+            <div class="info-block">
+                <span class="info-label">📅 行程安排</span>
+                <div class="info-text">睡到自然醒出发。游玩【鹅泉风景区】。这是平地水乡，水清澈见底。走累了就在亭子喝茶，<span class="highlight">零体力消耗，非常轻松</span>。</div>
+            </div>
+            <div class="info-block">
+                <span class="info-label">🍜 住宿美食</span>
+                <div class="info-text">住靖西市区或鹅泉边。午餐推荐农家乐：泉水煎鸭蛋、炒野菜。</div>
+            </div>
+        </div>
+        <div class="action-area">
+            <a href="https://uri.amap.com/search?keyword=靖西鹅泉风景区&callnative=1" class="btn btn-gaode" target="_blank">🔵 打开高德地图导航</a>
+            <button onclick="copyText('靖西鹅泉风景区')" class="btn btn-copy">📋 复制目的地</button>
+        </div>
     </div>
 
+    <!-- DAY 3 -->
     <div class="day-card">
-        <div class="day-header"><span>Day 3 (2月22日)</span><span>人在画中游</span></div>
-        <div class="route">📍 靖西 ➔ 明仕田园 (约1.5小时)</div>
-        <details>
-            <summary>👇 点击查看详细安排</summary>
-            <div class="details-content">
-                <p><b>路上风景：</b> 行驶在“中国最美高速”合那高速上，窗外全是喀斯特山水。</p>
-                <p><b>核心游玩：</b>【明仕河竹筏】。坐在平稳的竹筏上顺流而下，听阿妹唱歌，看两岸奇峰异石，极其安逸。</p>
-                <div class="nav-actions">
-                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=大新明仕田园" class="btn-wechat" target="_blank">🟢 微信一键导航</a>
-                    <a href="https://uri.amap.com/search?keyword=大新明仕田园" class="btn-gaode" target="_blank">🔵 高德地图打开</a>
-                </div>
-                <p><b>住宿：</b> 强烈建议住明仕田园景区内的度假村，推窗即是山水晨雾。</p>
+        <div class="day-header">
+            <div>
+                <div class="day-theme">人在画中游</div>
+                <div class="day-date">2月22日 (第三天)</div>
             </div>
-        </details>
+            <span class="day-tag">Day 3</span>
+        </div>
+        <div class="route-info">靖西 ➔ 明仕田园 (约1.5小时)</div>
+        <div class="content">
+            <div class="info-block">
+                <span class="info-label">📅 行程安排</span>
+                <div class="info-text">走“中国最美高速”合那高速。核心体验【明仕河竹筏】，坐竹筏听歌看山水，<span class="highlight">不用走路</span>，极其安逸。</div>
+            </div>
+            <div class="info-block">
+                <span class="info-label">🏡 住宿推荐</span>
+                <div class="info-text">强烈建议住【明仕田园】景区内，推窗就是山水画。</div>
+            </div>
+        </div>
+        <div class="action-area">
+            <a href="https://uri.amap.com/search?keyword=大新明仕田园&callnative=1" class="btn btn-gaode" target="_blank">🔵 打开高德地图导航</a>
+            <button onclick="copyText('大新明仕田园')" class="btn btn-copy">📋 复制目的地</button>
+        </div>
     </div>
 
+    <!-- DAY 4 -->
     <div class="day-card">
-        <div class="day-header"><span>Day 4 (2月23日)</span><span>跨国大瀑布</span></div>
-        <div class="route">📍 明仕田园 ➔ 德天瀑布 ➔ 崇左市区</div>
-        <details>
-            <summary>👇 点击查看详细安排</summary>
-            <div class="details-content">
-                <p><b>核心游玩：</b>【德天跨国瀑布】（车程约40分钟）。亚洲第一大跨国瀑布，极其震撼。</p>
-                <div class="nav-actions">
-                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=德天跨国瀑布游客中心" class="btn-wechat" target="_blank">🟢 导航至瀑布游客中心</a>
-                </div>
-                <p><b>长辈专享路线：</b> 坐观光车进入 ➔ 平缓木栈道观景 ➔ <span class="highlight">坐登高魔毯（平面电梯）</span>上山，保护膝盖！</p>
-                <p><b>住宿：</b> 下午驱车约1.5小时前往崇左市区入住，为明天返程做准备。</p>
-                <div class="nav-actions">
-                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=崇左市" class="btn-wechat" target="_blank">🟢 游玩结束导航至崇左市</a>
-                </div>
+        <div class="day-header">
+            <div>
+                <div class="day-theme">跨国大瀑布</div>
+                <div class="day-date">2月23日 (第四天)</div>
             </div>
-        </details>
+            <span class="day-tag">Day 4</span>
+        </div>
+        <div class="route-info">明仕 ➔ 德天瀑布 ➔ 崇左</div>
+        <div class="content">
+            <div class="info-block">
+                <span class="info-label">📅 行程安排</span>
+                <div class="info-text">游览【德天跨国瀑布】。请务必走长辈路线：<br>1. 坐观光车进入<br>2. 走平缓木栈道<br>3. <span class="highlight">坐魔毯(平面电梯)上山</span>，保护膝盖！</div>
+            </div>
+            <div class="info-block">
+                <span class="info-label">🚗 下午转场</span>
+                <div class="info-text">游玩结束后，开车去崇左市区住（约1.5小时），方便明天回家。</div>
+            </div>
+        </div>
+        <div class="action-area">
+            <a href="https://uri.amap.com/search?keyword=德天跨国瀑布游客中心&callnative=1" class="btn btn-gaode" target="_blank">🔵 导航：德天瀑布游客中心</a>
+            <a href="https://uri.amap.com/search?keyword=崇左市&callnative=1" class="btn btn-gaode" style="background-color: #5ca4ea;" target="_blank">🔵 晚上导航：崇左市区</a>
+        </div>
     </div>
 
+    <!-- DAY 5 -->
     <div class="day-card">
-        <div class="day-header"><span>Day 5 (2月24日)</span><span>平安返程</span></div>
-        <div class="route">📍 崇左 ➔ 六盘水 (约6-7小时)</div>
-        <details>
-            <summary>👇 点击查看详细安排</summary>
-            <div class="details-content">
-                <p><b>返程策略：</b> 今天车程较长，务必<span class="highlight">每开2小时进服务区休息15分钟</span>。下车伸展腰腿，喝点热水。</p>
-                <div class="nav-actions">
-                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=六盘水市" class="btn-wechat" target="_blank">🟢 导航回六盘水</a>
-                </div>
-                <p>如果觉得疲倦，可在中途“兴义市”下高速住一晚，明天再回，安全第一。</p>
+        <div class="day-header">
+            <div>
+                <div class="day-theme">平安返程</div>
+                <div class="day-date">2月24日 (第五天)</div>
             </div>
-        </details>
+            <span class="day-tag">Day 5</span>
+        </div>
+        <div class="route-info">崇左 ➔ 六盘水 (约6-7小时)</div>
+        <div class="content">
+            <div class="info-block">
+                <span class="info-label">⚠️ 安全提示</span>
+                <div class="info-text">今天路程较长。务必<span class="highlight">每开2小时进服务区休息15分钟</span>。下车伸懒腰，喝热水。</div>
+            </div>
+            <div class="info-block">
+                <span class="info-label">💡 备选方案</span>
+                <div class="info-text">如果累了，不要硬撑，中途在“兴义市”住一晚，安全第一！</div>
+            </div>
+        </div>
+        <div class="action-area">
+            <a href="https://uri.amap.com/search?keyword=六盘水市&callnative=1" class="btn btn-gaode" target="_blank">🔵 导航回家：六盘水</a>
+        </div>
     </div>
 
-    <div class="tips">
-        <b>💡 给爸妈的小贴士：</b><br>
-        1. 记得带<b>身份证</b>（门票有老人优惠）。<br>
-        2. 广西白天约 15℃-25℃，带上<b>薄外套</b>和防晒霜。<br>
-        3. <b>点击绿色的“微信一键导航”</b>，可以直接在微信里规划驾车路线，非常方便！
+    <div class="tips-card">
+        <span class="tips-title">💡 给爸妈的温馨提示：</span>
+        1. 证件：记得带<b>身份证</b>（门票有老人优惠）。<br>
+        2. 衣物：广西白天暖和（20℃左右），带<b>薄外套</b>和防晒霜。<br>
+        3. 导航：点击蓝色的<b>“打开高德地图”</b>即可。如果打不开，点击白色的<b>“复制目的地”</b>，然后去车上输入。
     </div>
+
+    <!-- 提示框 -->
+    <div id="toast">已复制，请粘贴到导航输入框</div>
+
+    <script>
+        function copyText(text) {
+            // 尝试使用现代API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showToast('“' + text + '” 已复制');
+                }, function(err) {
+                    fallbackCopyText(text);
+                });
+            } else {
+                fallbackCopyText(text);
+            }
+        }
+
+        function fallbackCopyText(text) {
+            // 传统兼容写法
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";  // 避免滚动到底部
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? '“' + text + '” 已复制' : '复制失败，请手动输入';
+                showToast(msg);
+            } catch (err) {
+                showToast('复制失败，请手动输入');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(message) {
+            var x = document.getElementById("toast");
+            x.innerText = message;
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
 
 </body>
 </html>
