@@ -16,6 +16,11 @@
         .details-content { margin-top: 10px; font-size: 15px; color: #555; }
         .highlight { color: #e74c3c; font-weight: bold; }
         .tips { background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; margin-top: 30px; font-size: 14px; }
+        
+        /* 导航按钮样式 */
+        .nav-actions { margin-top: 10px; margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-wechat { background-color: #07c160; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; }
+        .btn-gaode { background-color: #0076FF; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; }
     </style>
 </head>
 <body>
@@ -29,10 +34,13 @@
         <details>
             <summary>👇 点击查看详细安排</summary>
             <div class="details-content">
-                <p><b>09:30</b> 吃完早餐，迎着晨光出发，全程高速路况极佳。</p>
-                <p><b>15:30</b> 抵达百色市，入住酒店休息。</p>
+                <p><b>09:30</b> 吃完早餐出发，全程高速路况极佳。</p>
                 <p><b>核心游玩：</b>【百色起义纪念园】。展馆有直梯，广场平整，体验红色文化，对腿脚非常友好。</p>
-                <p><b>美食推荐：</b> 晚上尝尝清淡的百色米粉或右江鱼。</p>
+                <div class="nav-actions">
+                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=百色起义纪念园" class="btn-wechat" target="_blank">🟢 微信一键导航</a>
+                    <a href="https://uri.amap.com/search?keyword=百色起义纪念园" class="btn-gaode" target="_blank">🔵 高德地图打开</a>
+                </div>
+                <p><b>住宿美食：</b> 15:30 抵达百色市入住。晚上尝尝清淡的百色米粉或右江鱼。</p>
             </div>
         </details>
     </div>
@@ -43,9 +51,13 @@
         <details>
             <summary>👇 点击查看详细安排</summary>
             <div class="details-content">
-                <p><b>上午：</b> 睡到自然醒，驱车前往靖西。</p>
+                <p><b>上午：</b> 睡到自然醒，酒店吃完早餐后驱车前往靖西。</p>
                 <p><b>核心游玩：</b>【鹅泉风景区】。纯平地水乡，看清澈泉水与初春田园。走累了就在亭子里喝茶看野鸭，<span class="highlight">完全零体力消耗</span>。</p>
-                <p><b>住宿：</b> 靖西市区或鹅泉周边客栈。</p>
+                <div class="nav-actions">
+                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=靖西鹅泉风景区" class="btn-wechat" target="_blank">🟢 微信一键导航</a>
+                    <a href="https://uri.amap.com/search?keyword=靖西鹅泉风景区" class="btn-gaode" target="_blank">🔵 高德地图打开</a>
+                </div>
+                <p><b>住宿美食：</b> 靖西市区或鹅泉周边客栈。午餐推荐农家乐（泉水煎鸭蛋、炒野菜）。</p>
             </div>
         </details>
     </div>
@@ -58,7 +70,11 @@
             <div class="details-content">
                 <p><b>路上风景：</b> 行驶在“中国最美高速”合那高速上，窗外全是喀斯特山水。</p>
                 <p><b>核心游玩：</b>【明仕河竹筏】。坐在平稳的竹筏上顺流而下，听阿妹唱歌，看两岸奇峰异石，极其安逸。</p>
-                <p><b>住宿：</b> 强烈建议住景区内的度假村，推窗即是山水晨雾。</p>
+                <div class="nav-actions">
+                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=大新明仕田园" class="btn-wechat" target="_blank">🟢 微信一键导航</a>
+                    <a href="https://uri.amap.com/search?keyword=大新明仕田园" class="btn-gaode" target="_blank">🔵 高德地图打开</a>
+                </div>
+                <p><b>住宿：</b> 强烈建议住明仕田园景区内的度假村，推窗即是山水晨雾。</p>
             </div>
         </details>
     </div>
@@ -69,9 +85,15 @@
         <details>
             <summary>👇 点击查看详细安排</summary>
             <div class="details-content">
-                <p><b>核心游玩：</b>【德天跨国瀑布】。亚洲第一大跨国瀑布，极其震撼。</p>
+                <p><b>核心游玩：</b>【德天跨国瀑布】（车程约40分钟）。亚洲第一大跨国瀑布，极其震撼。</p>
+                <div class="nav-actions">
+                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=德天跨国瀑布游客中心" class="btn-wechat" target="_blank">🟢 导航至瀑布游客中心</a>
+                </div>
                 <p><b>长辈专享路线：</b> 坐观光车进入 ➔ 平缓木栈道观景 ➔ <span class="highlight">坐登高魔毯（平面电梯）</span>上山，保护膝盖！</p>
                 <p><b>住宿：</b> 下午驱车约1.5小时前往崇左市区入住，为明天返程做准备。</p>
+                <div class="nav-actions">
+                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=崇左市" class="btn-wechat" target="_blank">🟢 游玩结束导航至崇左市</a>
+                </div>
             </div>
         </details>
     </div>
@@ -83,6 +105,9 @@
             <summary>👇 点击查看详细安排</summary>
             <div class="details-content">
                 <p><b>返程策略：</b> 今天车程较长，务必<span class="highlight">每开2小时进服务区休息15分钟</span>。下车伸展腰腿，喝点热水。</p>
+                <div class="nav-actions">
+                    <a href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&to=六盘水市" class="btn-wechat" target="_blank">🟢 导航回六盘水</a>
+                </div>
                 <p>如果觉得疲倦，可在中途“兴义市”下高速住一晚，明天再回，安全第一。</p>
             </div>
         </details>
@@ -92,7 +117,7 @@
         <b>💡 给爸妈的小贴士：</b><br>
         1. 记得带<b>身份证</b>（门票有老人优惠）。<br>
         2. 广西白天约 15℃-25℃，带上<b>薄外套</b>和防晒霜。<br>
-        3. 常备肠胃药和保温杯。祝旅途愉快！
+        3. <b>点击绿色的“微信一键导航”</b>，可以直接在微信里规划驾车路线，非常方便！
     </div>
 
 </body>
